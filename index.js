@@ -1,10 +1,17 @@
 const { Builder, By, Key, until } = require('selenium-webdriver')
 const assert = require('assert')
 
+
 describe('search hk50 test', function() {
-    this.timeout(30000)
+    this.timeout(300000)
     let driver
+    //let WebDriverWait;
     let vars
+    let login = "shkolar.neymeka@bk.ru"
+    let password = "V$#C8BZC6Nn*5jr"
+    let expectedValue = "hk50"
+    let realvalue
+        //let wait = new WebDriverWait(driver, 10);
     beforeEach(async function() {
         driver = await new Builder().forBrowser('firefox').build()
         vars = {}
@@ -13,23 +20,19 @@ describe('search hk50 test', function() {
         await driver.quit();
     })
     it('search hk50 test', async function() {
-        await driver.get("https://my.liteforex.com/ru")
+        await driver.get("https://my.liteforex.com/ru?openPopup=%2Fru%2Flogin%2Fpopup%3FreturnUrl%3D%252Fru%252F")
         await driver.manage().window().setRect(1084, 697)
-        await driver.findElement(By.id("js_header_demo_login")).click()
-        //await driver.findElement(By.id("popup_login")).show()
-        //await driver.findElement(By.name("loginform-login")).click()
-        await driver.findElement(By.id("loginform-login")).sendKeys(" shkolar.neymeka@bk.ru")
-        //await driver.findElement(By.id("loginform-password")).click()
-        await driver.findElement(By.id("loginform-password")).sendKeys("V$#C8BZC6Nn*5jr")
+        await driver.sleep(3000);
+        await driver.findElement(By.id("loginform-login")).sendKeys(login)
+        await driver.findElement(By.id("loginform-password")).sendKeys(password)
         await driver.findElement(By.css(".btn_large:nth-child(1)")).click()
+        await driver.sleep(3000);
         await driver.findElement(By.name("search")).click()
-        await driver.findElement(By.name("search")).sendKeys("hk")
+        await driver.findElement(By.name("search")).sendKeys(expectedValue)
+        await driver.sleep(3000);
+        realvalue = await driver.findElement(By.css(".item:nth-child(2) > .link")).innerHTML
         await driver.findElement(By.css(".item:nth-child(2) > .link")).click()
-        {
-            const element = await driver.findElement(By.linkText("Информация об инструменте"))
-            await driver.actions({ bridge: true }).moveToElement(element).perform()
-        }
-        await driver.findElement(By.css(".page")).click()
-        await driver.close()
+        assert.equal(expectedValue, realvalue);
+        //await driver.close()
     })
 })
