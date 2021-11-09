@@ -1,0 +1,24 @@
+{
+  "name": "lab8_webdriver",
+  "version": "1.0.0",
+  "description": "selenium project",
+  "main": "index.js",
+  "scripts": {
+    "test1": "Test\firstTest.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/talatynnikA/Soft_Testing_Labs.git"
+  },
+  "author": "Artyom Talatynnik",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/talatynnikA/Soft_Testing_Labs/issues"
+  },
+  "homepage": "https://github.com/talatynnikA/Soft_Testing_Labs#readme",
+  "dependencies": {
+    "mocha": "^9.1.3",
+    "selenium-webdriver": "^4.0.0"
+  }
+}
